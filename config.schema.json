@@ -1,0 +1,84 @@
+{
+  "pluginAlias": "HomebridgeRestartSwitch",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "A HomeKit switch that restarts Homebridge. Accessory info (hostname, IP, versions) is shown in the Home/Eve app as a status readout.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "On Cue HB",
+        "required": true
+      },
+      "oncueHomeId": {
+        "title": "On Cue Home ID",
+        "description": "Your internal client/device ID for this Pi (e.g. from the On Cue Home backend). Appended to the accessory's Serial Number, visible on the accessory's info page in the Home app.",
+        "type": "string",
+        "placeholder": "e.g. OCH-00123"
+      },
+      "restartMethod": {
+        "title": "Restart method",
+        "type": "string",
+        "default": "auto",
+        "oneOf": [
+          { "title": "Auto-detect (recommended)", "enum": ["auto"] },
+          { "title": "hb-service (Homebridge Config UI X)", "enum": ["hb-service"] },
+          { "title": "systemd (systemctl restart <service>)", "enum": ["systemd"] },
+          { "title": "PM2 (pm2 restart <process>)", "enum": ["pm2"] },
+          { "title": "Custom shell command", "enum": ["custom"] },
+          { "title": "process.exit only (rely on your process manager to relaunch)", "enum": ["exit"] }
+        ]
+      },
+      "serviceName": {
+        "title": "systemd service name",
+        "type": "string",
+        "default": "homebridge",
+        "condition": {
+          "functionBody": "return model.restartMethod === 'systemd';"
+        }
+      },
+      "pm2ProcessName": {
+        "title": "PM2 process name",
+        "type": "string",
+        "default": "homebridge",
+        "condition": {
+          "functionBody": "return model.restartMethod === 'pm2';"
+        }
+      },
+      "customCommand": {
+        "title": "Custom restart command",
+        "type": "string",
+        "placeholder": "e.g. sudo systemctl restart homebridge@my-instance",
+        "condition": {
+          "functionBody": "return model.restartMethod === 'custom';"
+        }
+      },
+      "useSudo": {
+        "title": "Prefix system commands with sudo",
+        "type": "boolean",
+        "default": false,
+        "condition": {
+          "functionBody": "return model.restartMethod === 'systemd' || model.restartMethod === 'hb-service';"
+        }
+      },
+      "confirmWindowSeconds": {
+        "title": "Re-arm window (seconds)",
+        "description": "After the switch fires, it ignores further taps for this many seconds — a simple debounce so an accidental double-tap in Home doesn't queue up multiple restarts.",
+        "type": "integer",
+        "default": 15,
+        "minimum": 3,
+        "maximum": 120
+      },
+      "restartDelaySeconds": {
+        "title": "Delay before restart (seconds)",
+        "description": "Pause after the switch fires before actually restarting, so HomeKit has time to acknowledge the command.",
+        "type": "integer",
+        "default": 2,
+        "minimum": 0,
+        "maximum": 30
+      }
+    }
+  }
+}

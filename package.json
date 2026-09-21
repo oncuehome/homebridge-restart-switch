@@ -1,0 +1,35 @@
+{
+  "displayName": "Homebridge Restart Switch",
+  "name": "homebridge-restart-switch",
+  "version": "1.0.0",
+  "description": "Expose a HomeKit switch that restarts Homebridge, with accessory info fields (hostname, IP, versions) doubling as a status readout.",
+  "license": "Apache-2.0",
+  "author": "On Cue Home",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oncuehome/homebridge-restart-switch.git"
+  },
+  "main": "dist/index.js",
+  "engines": {
+    "homebridge": "^1.6.0 || ^2.0.0",
+    "node": "^18.15.0 || ^20.7.0 || ^22 || ^24"
+  },
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "watch": "npm run build && npm link && nodemon",
+    "lint": "eslint src/**.ts --max-warnings=0"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "restart",
+    "homebridge"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "homebridge": "^1.7.0",
+    "nodemon": "^3.0.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
+}
