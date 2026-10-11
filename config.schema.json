@@ -13,8 +13,8 @@
         "required": true
       },
       "oncueHomeId": {
-        "title": "On Cue Home ID",
-        "description": "Your internal client/device ID for this Pi (e.g. from the On Cue Home backend). Appended to the accessory's Serial Number, visible on the accessory's info page in the Home app.",
+        "title": "Device ID (optional)",
+        "description": "An optional ID to label this Pi, for example a client or site reference. Shown as the Model in the Home app's Hubs & Bridges list. Defaults to the hostname.",
         "type": "string",
         "placeholder": "e.g. OCH-00123"
       },
