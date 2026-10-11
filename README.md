@@ -29,7 +29,7 @@ Restart Homebridge once manually afterwards to pick it up.
 
 ## Configure
 
-In Homebridge UI → Plugins → On Cue HB → Settings, or add directly to
+In Homebridge UI → Plugins → Homebridge Restart Switch → Settings, or add directly to
 `config.json` under `platforms`:
 
 ```json
@@ -37,7 +37,7 @@ In Homebridge UI → Plugins → On Cue HB → Settings, or add directly to
   "platforms": [
     {
       "platform": "HomebridgeRestartSwitch",
-      "name": "On Cue HB",
+      "name": "Restart Homebridge",
       "deviceId": "site-0123",
       "restartMethod": "systemd",
       "useSudo": true,

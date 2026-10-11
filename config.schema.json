@@ -9,7 +9,7 @@
       "name": {
         "title": "Name",
         "type": "string",
-        "default": "On Cue HB",
+        "default": "Restart Homebridge",
         "required": true
       },
       "deviceId": {
