@@ -1,7 +1,7 @@
 {
   "displayName": "Homebridge Restart Switch",
   "name": "homebridge-restart-switch",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Expose a HomeKit switch that restarts Homebridge, with accessory info fields (hostname, IP, versions) doubling as a status readout.",
   "license": "Apache-2.0",
   "author": "On Cue Home",

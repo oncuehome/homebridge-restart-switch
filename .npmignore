@@ -5,3 +5,4 @@ nodemon.json
 .github/
 .vscode/
 *.log
+*.tgz
