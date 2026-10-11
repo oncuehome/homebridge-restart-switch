@@ -57,7 +57,7 @@ export function setupRestartAccessory(
   // --- Restart control ---
   // Shown as ON while Homebridge is running normally; turning it OFF is
   // the trigger to restart, and it flips back to ON a moment later.
-  const switchName = (config.name as string) || 'Restart Homebridge';
+  const switchName = (config.name as string) || 'Homebridge';
   const switchService = accessory.getService(S.Switch) || accessory.addService(S.Switch, switchName);
 
   let armed = true;

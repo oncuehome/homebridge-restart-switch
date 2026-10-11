@@ -48,7 +48,7 @@ export class RestartSwitchPlatform implements DynamicPlatformPlugin {
   }
 
   private discoverDevices(): void {
-    const name = this.config.name || 'Restart Homebridge';
+    const name = this.config.name || 'Homebridge';
     const uuid = this.api.hap.uuid.generate(PLUGIN_NAME + '-restart-switch');
 
     const existing = this.accessories.find((a) => a.UUID === uuid);
