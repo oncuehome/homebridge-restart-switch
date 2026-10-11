@@ -2,7 +2,7 @@
 
 A HomeKit switch that restarts Homebridge, with the accessory's info
 fields doubling as a status readout — hostname, LAN IP, Homebridge/Node
-versions, and an assigned On Cue Home ID (shown as the Model field, so
+versions, and an optional device ID you assign (shown as the Model field, so
 it's visible at a glance in the Home app's Home Hubs & Bridges list).
 
 ## Install
@@ -38,7 +38,7 @@ In Homebridge UI → Plugins → On Cue HB → Settings, or add directly to
     {
       "platform": "HomebridgeRestartSwitch",
       "name": "On Cue HB",
-      "oncueHomeId": "OCH-00123",
+      "deviceId": "site-0123",
       "restartMethod": "systemd",
       "useSudo": true,
       "serviceName": "homebridge",
@@ -90,8 +90,10 @@ Home Hub, with no need for your phone to reach the Pi directly.
 Open the accessory's details page in Home (or the Eve app, which shows
 more fields) to see:
 
-- **Model** — the On Cue Home ID you assigned in `oncueHomeId`, so you
-  can tell clients apart at a glance in the Home Hubs & Bridges list.
+- **Model** — the ID you assigned in `deviceId` (or the hostname if you
+  left it blank), so you can tell several Pis apart at a glance in the
+  Home Hubs & Bridges list. Configs that still use the old `oncueHomeId`
+  name keep working.
 - **Serial Number** — hostname, LAN IP, and Homebridge/Node versions,
   for deeper troubleshooting.
 

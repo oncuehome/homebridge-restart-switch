@@ -11,6 +11,8 @@ import { performRestart, RestartConfig } from './restartMethods';
 import { RestartSwitchPlatform } from './platform';
 
 interface RestartPlatformConfig extends PlatformConfig, RestartConfig {
+  deviceId?: string;
+  /** @deprecated Old name for `deviceId`; still read so existing configs keep working. */
   oncueHomeId?: string;
   confirmWindowSeconds?: number;
   restartDelaySeconds?: number;
@@ -32,17 +34,17 @@ export function setupRestartAccessory(
   const { Service: S, Characteristic: C } = platform;
   const log = platform.log;
 
-  // --- Accessory info doubles as a client-info readout ---
+  // --- Accessory info doubles as a status readout ---
   const hostname = os.hostname();
   const lanIp = getLanIp();
   const homebridgeVersion = platform.api.serverVersion || 'unknown';
   const nodeVersion = process.version;
-  const oncueHomeId = config.oncueHomeId?.trim();
+  const deviceId = (config.deviceId ?? config.oncueHomeId)?.trim();
 
   // Model is what the Home app shows at a glance in the Home Hubs &
-  // Bridges list, so the assigned On Cue Home ID goes there — Serial
+  // Bridges list, so the optional device ID goes there — Serial
   // Number carries the fuller hostname/IP detail for when you tap in.
-  const modelId = oncueHomeId || hostname;
+  const modelId = deviceId || hostname;
   const serial = `${hostname} (${lanIp}) · Homebridge ${homebridgeVersion} / Node ${nodeVersion}`;
 
   const infoService = accessory.getService(S.AccessoryInformation) || accessory.addService(S.AccessoryInformation);
