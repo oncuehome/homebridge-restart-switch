@@ -9,7 +9,7 @@
       "name": {
         "title": "Name",
         "type": "string",
-        "default": "Homebridge",
+        "default": "Restart Homebridge",
         "required": true
       },
       "deviceId": {

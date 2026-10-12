@@ -37,7 +37,7 @@ In Homebridge UI → Plugins → Homebridge Restart Switch → Settings, or add 
   "platforms": [
     {
       "platform": "HomebridgeRestartSwitch",
-      "name": "Homebridge",
+      "name": "Restart Homebridge",
       "deviceId": "site-0123",
       "restartMethod": "systemd",
       "useSudo": true,
