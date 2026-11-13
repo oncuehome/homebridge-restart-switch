@@ -102,6 +102,7 @@ export function setupRestartAccessory(
       const delaySeconds = config.restartDelaySeconds ?? 2;
       const confirmWindow = (config.confirmWindowSeconds ?? 15) * 1000;
 
+      platform.restartLog.record('switch');
       log.warn(`Restart switch triggered. Restarting Homebridge in ${delaySeconds}s...`);
       resetSwitch();
 

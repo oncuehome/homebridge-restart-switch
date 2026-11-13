@@ -113,3 +113,8 @@ more fields) to see:
   turned out to be unrelated (an iOS/tvOS 27 HomeKit bug, since fixed
   by Apple), but the Platform API is the well-trodden path every other
   plugin on a typical instance already uses, so it's kept that way.
+
+## Restart history
+
+Since 1.0.4 the plugin keeps a short history of restarts in Homebridge's storage folder (`restart-switch-log.json`, the last 200 entries): every tap of the switch, and every Homebridge start. A start that follows a tap within five minutes counts as "from the switch"; any other start is a restart from something else (a crash, an update or a reboot). Each start writes one line to the log, for example `Homebridge started. Last 7 days: 3 starts (1 from the switch, 2 other).` Nothing leaves the Pi.
+

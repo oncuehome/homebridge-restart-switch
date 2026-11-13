@@ -6,3 +6,4 @@ nodemon.json
 .vscode/
 *.log
 *.tgz
+test-restart-log.js

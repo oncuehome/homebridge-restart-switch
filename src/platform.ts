@@ -8,7 +8,9 @@ import {
   Characteristic,
 } from 'homebridge';
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
+import path from 'path';
 import { setupRestartAccessory } from './restartAccessory';
+import { RestartLog } from './restartLog';
 
 /**
  * Platform version of the restart-switch plugin. Every other plugin on
@@ -24,6 +26,7 @@ export class RestartSwitchPlatform implements DynamicPlatformPlugin {
   public readonly Characteristic: typeof Characteristic;
 
   public readonly accessories: PlatformAccessory[] = [];
+  public readonly restartLog: RestartLog;
 
   constructor(
     public readonly log: Logger,
@@ -32,6 +35,15 @@ export class RestartSwitchPlatform implements DynamicPlatformPlugin {
   ) {
     this.Service = api.hap.Service;
     this.Characteristic = api.hap.Characteristic;
+
+    // Keep a short history of restarts beside Homebridge's own files.
+    this.restartLog = new RestartLog(path.join(api.user.storagePath(), 'restart-switch-log.json'));
+    this.restartLog.record('start');
+    const week = this.restartLog.summary(7);
+    this.log.info(
+      `Homebridge started. Last 7 days: ${week.starts} start${week.starts === 1 ? '' : 's'} ` +
+      `(${week.fromSwitch} from the switch, ${week.other} other).`,
+    );
 
     this.api.on('didFinishLaunching', () => {
       this.discoverDevices();
